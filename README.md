@@ -1,4 +1,4 @@
-#cConnection During Incarceration — Prototype
+# Connection During Incarceration — Prototype
 
 A lightweight, public-facing prototype that communicates a policy/product concept to support family connection during incarceration. Built as a static site for quick iteration, easy sharing, and portfolio-style review.
 
