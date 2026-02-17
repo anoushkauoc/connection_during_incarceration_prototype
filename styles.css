@@ -1,0 +1,831 @@
+/* =========================
+   TOKENS
+========================= */
+
+:root{
+  --bg:#f6f7fb;
+  --panel:#ffffff;
+  --panel2:#f3f5fb;
+  --text:#111318;
+  --muted:#4f5b6b;
+  --muted2:#6a7687;
+  --border:rgba(17,19,24,.12);
+  --shadow: 0 10px 26px rgba(17,19,24,.08);
+
+  --accent:#2f5cff;
+  --accent2:#ff9f2e;
+  --accent3:#13b981;
+
+  --radius: 18px;
+  --radius2: 24px;
+  --max: 1100px;
+
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+  --font-serif: "IBM Plex Serif", ui-serif, Georgia, "Times New Roman", Times, serif;
+
+  --font-base: 16px;
+}
+
+/* =========================
+   BASE
+========================= */
+
+*{ box-sizing:border-box; }
+html{ scroll-behavior:smooth; }
+
+body{
+  margin:0;
+  font-family: var(--font-sans);
+  font-size: var(--font-base);
+  line-height: 1.7;
+  letter-spacing: -0.01em;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+
+  background:
+    radial-gradient(900px 500px at 20% 0%, rgba(47,92,255,.10), transparent 55%),
+    radial-gradient(800px 450px at 90% 10%, rgba(255,159,46,.10), transparent 55%),
+    radial-gradient(700px 400px at 60% 90%, rgba(19,185,129,.08), transparent 55%),
+    var(--bg);
+
+  color:var(--text);
+}
+
+a{ color:var(--accent); }
+a:hover{ color:#1d3fe0; }
+
+code{
+  background: rgba(47,92,255,.08);
+  padding: .1rem .35rem;
+  border-radius: 10px;
+  border: 1px solid rgba(47,92,255,.18);
+  color: #1d2c6a;
+}
+
+.container{
+  width: min(var(--max), calc(100% - 2rem));
+  margin: 0 auto;
+}
+
+/* Accessibility skip link */
+.skip{
+  position:absolute;
+  top:-40px;
+  left:10px;
+  background:var(--text);
+  color:#fff;
+  padding:.5rem .75rem;
+  border-radius:10px;
+  z-index:999;
+}
+.skip:focus{ top:10px; }
+
+/* =========================
+   HEADER / NAV
+========================= */
+
+.site-header{
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(17,19,24,.08);
+  background: #fff;
+}
+
+.header__inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap: 16px;
+}
+
+.brand__title{
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: .06em;
+}
+
+.brand__sub{
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.nav{
+  display:flex;
+  gap: 26px;
+  flex-wrap: wrap;
+}
+
+.nav a{
+  text-decoration:none;
+  color:#374151;
+  font-weight:600;
+  font-size:14px;
+  letter-spacing: .01em;
+}
+
+.nav a:hover{ color:#111827; }
+
+/* =========================
+   TYPE
+========================= */
+
+.kicker{
+  margin:0 0 .25rem;
+  color: var(--muted);
+  letter-spacing:.04em;
+  text-transform:uppercase;
+  font-size:.9rem;
+}
+
+h1{
+  margin:.2rem 0 .65rem;
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height:1.12;
+  max-width: 52ch;
+  letter-spacing: -0.02em;
+}
+
+h1::after{
+  content:"";
+  display:block;
+  width: 92px;
+  height: 4px;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  border-radius: 999px;
+  margin-top: .85rem;
+}
+
+.section h2{
+  margin:0 0 .75rem;
+  font-family: var(--font-serif);
+  font-size: clamp(1.35rem, 2.4vw, 1.75rem);
+  letter-spacing: -0.02em;
+}
+
+.section h2::after{
+  content:"";
+  display:block;
+  width: 58px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent3), var(--accent));
+  border-radius: 999px;
+  margin-top: .6rem;
+}
+
+.section__lede{
+  margin:0 0 1.25rem;
+  color: var(--muted);
+  max-width: 72ch;
+}
+
+.section p{
+  max-width: 72ch;
+}
+
+.muted{ color: var(--muted2); }
+.small{ font-size:.92rem; }
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+  padding: 32px 0;
+}
+
+.hero__layout{
+  display: grid;
+  grid-template-columns: 1.25fr 0.75fr;
+  gap: 100px;
+  align-items: start;
+}
+
+.hero__main{
+  max-width: 720px;
+}
+
+.hero__aside{
+  position: sticky;
+  top: 120px;
+}
+
+.hero__cards{
+  display:flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+@media (max-width: 1000px){
+  .hero__layout{ grid-template-columns: 1fr; gap: 28px; }
+  .hero__aside{ position: relative; top: 0; }
+}
+
+/* =========================
+   SECTIONS
+========================= */
+
+.section{ padding: 2.5rem 0; }
+
+/* =========================
+   CARDS
+========================= */
+
+.card{
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius2);
+  padding: 1.35rem;
+  box-shadow: var(--shadow);
+  height: 100%;
+}
+
+/* In cards/callouts, let text use full width */
+.card p,
+.callout p{
+  max-width: none;
+}
+
+/* =========================
+   STATS
+========================= */
+
+.stat{
+  padding: 1.55rem;
+  border-radius: 22px;
+  position: relative;
+  overflow: hidden;
+}
+
+.stat::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:0;
+  bottom:0;
+  width: 6px;
+  background: linear-gradient(180deg, var(--accent), var(--accent2));
+  opacity:.9;
+}
+
+.stat__value{
+  font-size: 2.35rem;
+  font-weight: 800;
+  letter-spacing: .01em;
+  color: var(--accent);
+}
+
+.stat__label{
+  color: var(--muted);
+  margin-top:.35rem;
+  font-size:1rem;
+  line-height: 1.55;
+}
+
+/* =========================
+   CALLOUTS
+========================= */
+
+.callout{
+  margin-top: 1.35rem;
+  padding: 1.2rem 1.25rem;
+  border-radius: var(--radius);
+  border: 1px solid rgba(47,92,255,.22);
+  background: rgba(47,92,255,.08);
+  color: var(--text);
+  border-left: 6px solid var(--accent);
+}
+
+.callout--indigo{
+  background: rgba(47,92,255,.08);
+  border: 1px solid rgba(47,92,255,.22);
+}
+
+/* =========================
+   GRIDS
+========================= */
+
+.grid-2{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+@media (max-width: 900px){
+  .grid-2{ grid-template-columns: 1fr; }
+}
+
+.grid-3{
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 900px){
+  .grid-3{ grid-template-columns: 1fr; }
+}
+
+/* =========================
+   LISTS
+========================= */
+
+.bullets{
+  margin:.6rem 0 0;
+  padding-left: 1.1rem;
+  color: var(--muted);
+}
+.bullets li{ margin:.35rem 0; }
+
+/* =========================
+   BUTTONS (clean, nice)
+========================= */
+
+.btn{
+  appearance: none;
+  -webkit-appearance: none;
+  border: 1px solid var(--border);
+  background: #fff;
+  color: var(--text);
+  border-radius: 999px;
+  padding: .55rem .9rem;
+  font-size: .92rem;
+  font-weight: 650;
+  line-height: 1;
+  cursor: pointer;
+  transition: transform .12s ease, border-color .12s ease, box-shadow .12s ease, background .12s ease;
+  box-shadow: 0 8px 18px rgba(17,19,24,.06);
+}
+
+.btn:hover{
+  transform: translateY(-1px);
+  border-color: rgba(47,92,255,.35);
+  box-shadow: 0 12px 24px rgba(17,19,24,.10);
+}
+
+.btn:active{
+  transform: translateY(0);
+  box-shadow: 0 6px 14px rgba(17,19,24,.08);
+}
+
+.btn--ghost{
+  background: transparent;
+  box-shadow: none;
+}
+
+.btn--ghost:hover{
+  background: rgba(47,92,255,.06);
+}
+
+/* =========================
+   SCALE ESTIMATE
+========================= */
+
+.scale-estimate{
+  display:grid;
+  grid-template-columns: 1.05fr .95fr;
+  gap: 1.25rem;
+  align-items: start;
+}
+
+@media (max-width: 900px){
+  .scale-estimate{ grid-template-columns: 1fr; }
+}
+
+.estimate h3,
+.assumptions h3{
+  margin: 0 0 .9rem;
+  font-size: 1.15rem;
+}
+
+.estimate__grid{
+  display:grid;
+  gap: .8rem;
+  margin-top: .25rem;
+}
+
+.estimate__row{
+  display:flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: .65rem .75rem;
+  border-radius: 14px;
+  background: var(--panel2);
+  border: 1px solid var(--border);
+}
+
+.estimate__label{
+  color: var(--muted);
+  font-weight: 650;
+}
+
+.estimate__value{
+  font-size: 1.45rem;
+  font-weight: 850;
+  letter-spacing: .01em;
+  color: var(--text);
+}
+
+.estimate__row.total{
+  background: rgba(47,92,255,.08);
+  border-color: rgba(47,92,255,.20);
+}
+
+.estimate__row.total .estimate__value{
+  color: var(--accent);
+  font-size: 1.65rem;
+}
+
+.estimate__note{
+  margin: .9rem 0 0;
+  color: var(--muted2);
+  line-height: 1.6;
+}
+
+.inputs{ display:grid; gap: .75rem; }
+.input{ display:grid; gap: .35rem; }
+
+.input span{
+  font-size: .92rem;
+  color: var(--muted2);
+  font-weight: 650;
+}
+
+.input input{
+  width: 100%;
+  padding: .6rem .7rem;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: #fff;
+  font-size: 1rem;
+}
+
+/* =========================
+   SIMULATOR
+========================= */
+
+#simulator .grid-2{
+  align-items: start;
+}
+
+.sim__header{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap: .75rem;
+  margin-bottom: .85rem;
+}
+
+.sim__buttons{
+  display:flex;
+  gap:.5rem;
+  flex-wrap:wrap;
+}
+
+.checklist{
+  display:flex;
+  flex-direction:column;
+  gap:.6rem;
+  margin-top:.25rem;
+}
+
+/* If your JS uses activityRow */
+.activityRow{
+  display:grid;
+  grid-template-columns: 18px 1fr;
+  gap:.75rem;
+  padding:.8rem .85rem;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  background: var(--panel2);
+  cursor: pointer;
+  transition: transform .08s ease, border-color .12s ease, background .12s ease;
+}
+
+.activityRow:hover{
+  transform: translateY(-1px);
+  background: #fff;
+  border-color: rgba(47,92,255,.24);
+}
+
+.activityRow__check{
+  margin-top:.2rem;
+  width:18px;
+  height:18px;
+}
+
+.activityRow__top{
+  display:flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: .75rem;
+}
+
+.activityRow__title{
+  font-weight: 750;
+}
+
+.activityRow__desc{
+  margin-top:.25rem;
+  color: var(--muted);
+  font-size: .95rem;
+  line-height: 1.35;
+  max-width: 60ch;
+}
+
+.activityRow__pts{
+  font-weight: 750;
+  font-size: .9rem;
+  padding: .22rem .55rem;
+  border-radius: 999px;
+  border: 1px solid rgba(17,19,24,.12);
+  background: #fff;
+  color: var(--text);
+  white-space: nowrap;
+}
+
+.meter, .progress, .unlocks{
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: .85rem .95rem;
+}
+
+.meter{
+  background: var(--panel2);
+  display:flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: .9rem;
+}
+
+.meter__label,
+.progress__label,
+.unlocks__label{
+  font-size: .78rem;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--muted2);
+  font-weight: 750;
+}
+
+.meter__value{
+  font-size: 2.1rem;
+  font-weight: 850;
+}
+
+.progress{
+  background: var(--panel);
+  margin-bottom: .9rem;
+}
+
+.progress__bar{
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(17,19,24,.10);
+  overflow: hidden;
+  margin-top: .55rem;
+}
+
+.progress__fill{
+  height: 100%;
+  border-radius: 999px;
+  background: var(--accent);
+  width: 0%;
+  transition: width .2s ease;
+}
+
+.progress__text{
+  margin-top:.55rem;
+  color: var(--muted);
+  font-size:.95rem;
+}
+
+.unlocks{
+  background: var(--panel2);
+}
+
+.unlocks__list{
+  margin: .55rem 0 0 0;
+  padding-left: 1.05rem;
+}
+
+.unlocks__list li{
+  margin: .28rem 0;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+.footer{
+  padding: 2rem 0 3rem;
+}
+
+.footer__inner{
+  display:flex;
+  justify-content:flex-end;
+}
+
+.top{
+  text-decoration:none;
+  font-weight:700;
+}
+/* ===== PROBLEM PAGE: remove the "two pages" white space ===== */
+
+/* If your section class is .section, this prevents "full-screen" panels */
+.section {
+  min-height: auto !important;
+  padding-top: 28px;
+  padding-bottom: 28px;
+}
+
+/* If your Problem section is #problem (or similar), kill hero spacing */
+#problem {
+  min-height: auto !important;
+  padding-bottom: 18px !important;
+  margin-bottom: 10px !important;
+}
+
+/* Reduce big gaps between stacked sections/cards */
+.section + .section {
+  margin-top: 14px !important;
+}
+
+/* Cards: keep nice look on screen, but don’t create extra vertical bulk */
+.card {
+  margin: 0;
+}
+
+.container {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* Hide page breaks on screen */
+.page-break {
+  display: none;
+}
+/* =========================
+   PRINT (single source of truth)
+   Paste this at the VERY bottom
+========================= */
+@media print {
+  /* Print color fidelity (Chrome) */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  /* Page setup */
+  @page {
+    margin: 0.55in 0.45in; /* top/bottom | left/right */
+  }
+
+  html, body {
+    margin: 0 !important;
+    padding: 0 !important;
+
+    /* Light blue paper */
+    background: #f6f7fb !important;
+
+    /* Make text readable */
+    font-size: 17px !important;     /* bump from 16 → 17 */
+    line-height: 1.55 !important;
+    color: #111318 !important;
+  }
+
+  /* Layout: use the printable width */
+  :root {
+    --max: 100% !important;
+  }
+
+  .container {
+    max-width: none !important;
+    width: 100% !important;
+    margin: 0 auto !important;
+    padding-left: 0.15in !important;
+    padding-right: 0.15in !important;
+  }
+
+  /* Remove sticky sidebar behavior (prints weird) */
+  .hero__aside {
+    position: static !important;
+    top: auto !important;
+  }
+
+  /* Hide interactive + nav UI for print */
+  .site-header,
+  .nav,
+  .skip,
+  button,
+  .btn,
+  .sim__buttons {
+    display: none !important;
+  }
+
+  /* Typography: clearer hierarchy */
+  h1 {
+    font-size: 32px !important;
+    line-height: 1.1 !important;
+    max-width: none !important; /* allow full width in print */
+  }
+
+  .section h2 {
+    font-size: 22px !important;
+    line-height: 1.15 !important;
+    margin-top: 0.25in !important;
+  }
+
+  h3 {
+    font-size: 17px !important;
+    line-height: 1.25 !important;
+  }
+
+  p, li {
+    font-size: 16px !important;
+    line-height: 1.6 !important;
+  }
+
+  /* Muted text often ends up too small when printing */
+  .muted,
+  .section__lede,
+  .stat__label,
+  .progress__text,
+  .activityRow__desc,
+  .estimate__note {
+    font-size: 15.5px !important;
+    line-height: 1.55 !important;
+    color: #4f5b6b !important;
+  }
+
+  /* Make “Motivation” and other paragraphs wider in print */
+  .section p,
+  .section__lede {
+    max-width: none !important;
+  }
+
+  /* Cards: keep white on blue page */
+  .card,
+  .callout,
+  .meter,
+  .progress,
+  .unlocks,
+  .estimate__row,
+  .activityRow {
+    background: #ffffff !important;
+    border: 1px solid rgba(17,19,24,.12) !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  /* Optional: soften heavy colored callouts for print */
+  .callout,
+  .callout--indigo,
+  .estimate__row.total {
+    background: rgba(47,92,255,.06) !important;
+    border-color: rgba(47,92,255,.18) !important;
+  }
+
+  /* Avoid awkward splits on headings */
+  h1, h2, h3 {
+    break-after: avoid !important;
+    page-break-after: avoid !important;
+  }
+
+  /* Your manual page breaks */
+  .page-break {
+    display: block !important;
+    break-before: page !important;
+    page-break-before: always !important;
+  }
+
+  /* Add the website link on every printed page */
+  body::after {
+    content: "https://applicantanonymous.github.io/risc_application/";
+    position: fixed;
+    bottom: 0.25in;
+    right: 0.45in;
+    font-size: 10.5px;
+    color: #6a7687;
+  }
+}
+
+/* Never show page-break spacers on screen */
+.page-break{
+  display: none;
+  height: 0;
+  margin: 0;
+  padding: 0;
+}
+
+@media print{
+  /* Force a new page wherever you placed .page-break */
+  .page-break{
+    display: block !important;
+    break-before: page;
+    page-break-before: always; /* legacy */
+    height: 0;
+  }
+}
